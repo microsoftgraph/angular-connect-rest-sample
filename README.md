@@ -1,6 +1,6 @@
-# Office 365 Connect Angular sample using unified API
+# Office 365 Connect Angular sample using unified API (preview)
 
-Connecting to Office 365 is the first step every app must take to start working with Office 365 services and data. This sample shows how to connect and then call one API through the unified API, and uses the Office Fabric UI to create an Office 365 experience.
+Connecting to Office 365 is the first step every app must take to start working with Office 365 services and data. This sample shows how to connect and then call one API through the unified API (preview), and uses the Office Fabric UI to create an Office 365 experience.
 
 ![Office 365 Angular Connect sample screenshot](./README assets/screenshot.png)
 
