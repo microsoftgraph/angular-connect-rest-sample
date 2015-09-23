@@ -23,7 +23,7 @@
 				redirectTo: '/'
 			});
 	
-		// Initialize the ADAL provider with your tenant name and clientID (found in the Azure Management Portal).
+		// Initialize the ADAL provider with your clientID (found in the Azure Management Portal) and the API URL (to enable CORS requests).
 		adalAuthenticationServiceProvider.init(
 			{
 				clientId: clientId,
