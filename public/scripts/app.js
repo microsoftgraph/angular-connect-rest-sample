@@ -22,19 +22,15 @@
 			.otherwise({
 				redirectTo: '/'
 			});
-
-		// The endpoints here are resources for cross origin requests.
-		var endpoints = {
-			'https://graph.microsoft.com': 'https://graph.microsoft.com'
-		};
 	
 		// Initialize the ADAL provider with your tenant name and clientID (found in the Azure Management Portal).
 		adalAuthenticationServiceProvider.init(
 			{
-				tenant: tenant,
 				clientId: clientId,
-				endpoints: endpoints,
-				cacheLocation: 'localStorage'
+				// The endpoints here are resources for cross origin requests.
+				endpoints: {
+					'https://graph.microsoft.com': 'https://graph.microsoft.com'
+				}
 			},
 			$httpProvider
 			);

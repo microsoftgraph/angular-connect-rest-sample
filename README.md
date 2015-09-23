@@ -14,18 +14,17 @@ To use the Office 365 Angular Connect sample, you need the following:
 * A Microsoft Azure tenant to register your application. Azure Active Directory (AD) provides identity services that applications use for authentication and authorization. A trial subscription can be acquired here: [Microsoft Azure](https://account.windowsazure.com/SignUp).
 
      > Important: You also need to make sure your Azure subscription is bound to your Office 365 tenant. To do this, see the Active Directory team's blog post, [Creating and Managing Multiple Windows Azure Active Directories](http://blogs.technet.com/b/ad/archive/2013/11/08/creating-and-managing-multiple-windows-azure-active-directories.aspx). The section **Adding a new directory** will explain how to do this. You can also see [Set up your Office 365 development environment](https://msdn.microsoft.com/office/office365/howto/setup-development-environment#bk_CreateAzureSubscription) and the section **Associate your Office 365 account with Azure AD to create and manage apps** for more information.
-* A client ID and redirect URI values of an application registered in Azure. This sample application must be granted the **Send mail as signed-in user** permission for the **Office 365 unified API (preview)**. [Add a web application in Azure](https://msdn.microsoft.com/office/office365/HowTo/add-common-consent-manually#bk_RegisterWebApp) and [grant the proper permissions](https://github.com/OfficeDev/O365-Angular-Unified-API-Connect/wiki/Grant-permissions-to-the-Connect-application-in-Azure) to it.
+* A client ID of an application registered in Azure. This sample application must be granted the **Send mail as signed-in user** permission for the **Office 365 unified API (preview)**. [Add a web application in Azure](https://msdn.microsoft.com/office/office365/HowTo/add-common-consent-manually#bk_RegisterWebApp) and [grant the proper permissions](https://github.com/OfficeDev/O365-Angular-Unified-API-Connect/wiki/Grant-permissions-to-the-Connect-application-in-Azure) to it.
 
      > Note: During the app registration process, make sure to specify **http://127.0.0.1:8080/** as the **Sign-on URL**.
 
 ## Configure and run the app
 
 1. Using your favorite IDE, open **config.js** in *public/scripts*.
-2. Replace *{your_subdomain}* with the subdomain of .onmicrosoft you specified for your Office 365 tenant.
-3. Replace *{your_app_client_ID}* with the client ID of your registered Azure application.
-4. Install project dependencies with Node's package manager (npm) by running ```npm install``` in the project's root directory on the command line.
-5. Start the development server by running ```node server.js``` in the project's root directory.
-3. Navigate to ```http://127.0.0.1:8080/``` in your web browser.
+2. Replace *{your_app_client_ID}* with the client ID of your registered Azure application.
+3. Install project dependencies with Node's package manager (npm) by running ```npm install``` in the project's root directory on the command line.
+4. Start the development server by running ```node server.js``` in the project's root directory.
+5. Navigate to ```http://127.0.0.1:8080/``` in your web browser.
 
 ## Questions and comments
 
