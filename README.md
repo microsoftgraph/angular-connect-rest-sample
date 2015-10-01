@@ -26,6 +26,8 @@ To use the Office 365 Angular Connect sample, you need the following:
 4. Start the development server by running ```node server.js``` in the project's root directory.
 5. Navigate to ```http://127.0.0.1:8080/``` in your web browser.
 
+To learn more about the sample, visit the [Understanding the Connect code sample Wiki page](https://github.com/OfficeDev/O365-Angular-Unified-API-Connect/wiki/Understanding-the-Connect-code-sample). 
+
 ## Questions and comments
 
 We'd love to get your feedback about the Office 365 Angular Connect sample. You can send your questions and suggestions to us in the [Issues](https://github.com/OfficeDev/O365-Angular-Unified-API-Connect/issues) section of this repository.
