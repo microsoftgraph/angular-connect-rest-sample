@@ -97,7 +97,7 @@
       // Build the HTTP request to send an email.
       var request = {
         method: 'POST',
-        url: 'https://graph.microsoft.com/beta/me/sendMail',
+        url: 'https://graph.microsoft.com/v1.0/me/sendmail',
         data: email
       };
       
