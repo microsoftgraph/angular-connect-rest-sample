@@ -2,7 +2,7 @@
 * Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
 */
 
-var clientId = '{your_app_client_ID}';
+var clientId = 'ENTER_YOUR_CLIENT_ID';
 
 // *********************************************************
 //
