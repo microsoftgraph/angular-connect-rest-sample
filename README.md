@@ -21,7 +21,7 @@ To use the Office 365 Angular Connect sample, you need the following:
 ## Configure and run the app
 
 1. Using your favorite IDE, open **config.js** in *public/scripts*.
-2. Replace *{your_app_client_ID}* with the client ID of your registered Azure application.
+2. Replace *ENTER_YOUR_CLIENT_ID* with the client ID of your registered Azure application.
 3. Install project dependencies with Node's package manager (npm) by running ```npm install``` in the project's root directory on the command line.
 4. Start the development server by running ```node server.js``` in the project's root directory.
 5. Navigate to ```http://127.0.0.1:8080/``` in your web browser.
