@@ -26,7 +26,7 @@ To use the Office 365 Angular Connect sample, you need the following:
 4. Start the development server by running ```node server.js``` in the project's root directory.
 5. Navigate to ```http://127.0.0.1:8080/``` in your web browser.
 
-To learn more about the sample, visit the [Understanding the Connect code sample Wiki page](https://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Connect/wiki/Understanding-the-Connect-code-sample). 
+To learn more about the sample, visit the [Angular walkthrough on graph.microsoft.io.](http://graph.microsoft.io/docs/platform/angular). 
 
 ## Questions and comments
 
@@ -39,7 +39,7 @@ Questions about Office 365 development in general should be posted to [Stack Ove
 * [Office Dev Center](http://dev.office.com/)
 * [Microsoft Graph API](http://graph.microsoft.io)
 * [Office 365 Profile sample for Angular](https://github.com/OfficeDev/O365-Angular-Profile)
-* [Office UI Fabric](https://github.com/OfficeDev/Office-UI-Fabric)
+* [Office UI Fabric](http://dev.office.com/fabric)
 
 ## Copyright
 Copyright (c) 2015 Microsoft. All rights reserved.
