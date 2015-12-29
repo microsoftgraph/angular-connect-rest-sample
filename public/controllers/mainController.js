@@ -39,10 +39,10 @@
         vm.isConnected = true;
         
         // Get the user alias from the universal principal name (UPN).
-        vm.userAlias = adalAuthenticationService.userInfo.profile.upn.split('@')[0];
+        vm.userAlias = adalAuthenticationService.userInfo.userName.split('@')[0];
         
         // Get the user email address.
-        vm.emailAddress = adalAuthenticationService.userInfo.profile.upn;
+        vm.emailAddress = adalAuthenticationService.userInfo.userName;
       }
       else {
         vm.isConnected = false;

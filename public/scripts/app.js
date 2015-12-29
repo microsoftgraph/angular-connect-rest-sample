@@ -27,10 +27,7 @@
 		adalAuthenticationServiceProvider.init(
 			{
 				clientId: clientId,
-				// The endpoints here are resources for ADAL to get tokens for.
-				endpoints: {
-					'https://graph.microsoft.com': 'https://graph.microsoft.com'
-				}
+        scope: ['https://graph.microsoft.com/mail.send']
 			},
 			$httpProvider
 			);
