@@ -27,7 +27,7 @@
 		adalAuthenticationServiceProvider.init(
 			{
 				clientId: clientId,
-        scope: ['https://graph.microsoft.com/mail.send']
+        scope: ['https://graph.microsoft.com/Mail.Send']
 			},
 			$httpProvider
 			);
