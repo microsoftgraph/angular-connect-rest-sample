@@ -24,13 +24,19 @@
 			});
 	
 		// Initialize the ADAL provider with your clientID (found in the Azure Management Portal) and the API URL (to enable CORS requests).
-		adalAuthenticationServiceProvider.init(
-			{
-				clientId: clientId,
-        scope: ['https://graph.microsoft.com/Mail.Send']
-			},
-			$httpProvider
-			);
+    adalAuthenticationServiceProvider.init(
+      {
+        clientId: clientId,
+        endpoints: {
+          'https://graph.microsoft.com': {
+            scope: ['https://graph.microsoft.com/Mail.Send']
+          }
+        },
+        tenant: 'common',
+        instance: 'https://login.microsoftonline.com/'
+      },
+      $httpProvider
+      );
 			
 		// Remove spinner from loading bar.
     cfpLoadingBarProvider.includeSpinner = false;
