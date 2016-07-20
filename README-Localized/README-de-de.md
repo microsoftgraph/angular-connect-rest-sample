@@ -10,7 +10,7 @@ Für die Arbeit mit Office 365-Diensten und -Daten muss jede App zunächst eine 
 
 Zum Verwenden des Office 365 Angular Connect-Beispiels benötigen Sie Folgendes:
 * [Node.js](https://nodejs.org/). Node ist für das Ausführen des Beispiels auf einem Entwicklungsserver und für das Installieren der Abhängigkeiten erforderlich. 
-* Ein Office 365-Konto. Sie können sich für ein &lt;a herf="https://aka.ms/devprogramsignup"&gt;Office 365-Entwicklerabonnement&lt;/a&gt; registrieren, das alle Ressourcen umfasst, die Sie zum Einstieg in die Entwicklung von Office 365-Apps benötigen.
+* Ein Office 365-Konto. Sie können sich für ein [Office 365-Entwicklerabonnement](https://aka.ms/devprogramsignup) registrieren, das alle Ressourcen umfasst, die Sie zum Einstieg in die Entwicklung von Office 365-Apps benötigen.
 
      > Hinweis: Wenn Sie bereits über ein Abonnement verfügen, gelangen Sie über den vorherigen Link zu einer Seite mit der Meldung „Leider können Sie Ihrem aktuellen Konto diesen Inhalt nicht hinzufügen“. Verwenden Sie in diesem Fall ein Konto aus Ihrem aktuellen Office 365-Abonnement.
 * Ein Microsoft Azure-Mandant zum Registrieren Ihrer Anwendung. Von Azure Active Directory (AD) werden Identitätsdienste bereitgestellt, die durch Anwendungen für die Authentifizierung und Autorisierung verwendet werden. Hier kann ein Testabonnement erworben werden: [Microsoft Azure](https://account.windowsazure.com/SignUp)
