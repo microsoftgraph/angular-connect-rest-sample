@@ -10,7 +10,7 @@ La connexion à Office 365 est la première étape que chaque application doit 
 
 Pour utiliser l’exemple de connexion d’Angular à Office 365, vous devez disposer des éléments suivants :
 * [Node.js](https://nodejs.org/). Node est requis pour exécuter l’exemple sur un serveur de développement et installer des dépendances. 
-* Un compte Office 365. Vous pouvez souscrire à &lt;a herf="https://profile.microsoft.com/RegSysProfileCenter/wizardnp.aspx?wizid=14b845d0-938c-45af-b061-f798fbb4d170"&gt;un abonnement Office 365 Développeur&lt;/a&gt; comprenant les ressources dont vous avez besoin pour commencer à créer des applications Office 365.
+* Un compte Office 365. Vous pouvez souscrire à [un abonnement Office 365 Développeur](https://aka.ms/devprogramsignup) comprenant les ressources dont vous avez besoin pour commencer à créer des applications Office 365.
 
      > Remarque : si vous avez déjà un abonnement, le lien précédent vous renvoie vers une page avec le message suivant : « Désolé, vous ne pouvez pas ajouter ceci à votre compte existant ». Dans ce cas, utilisez un compte lié à votre abonnement Office 365 existant.
 * Un client Microsoft Azure pour enregistrer votre application. Azure Active Directory (AD) fournit des services d’identité que les applications utilisent à des fins d’authentification et d’autorisation. Un abonnement d’évaluation peut être demandé ici : [Microsoft Azure](https://account.windowsazure.com/SignUp).
