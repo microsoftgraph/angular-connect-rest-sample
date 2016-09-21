@@ -1,4 +1,4 @@
-# Microsoft Graph Connect Sample for Angular
+# Microsoft Graph Connect Sample for AngularJS
 
 ## Table of contents
 
@@ -13,13 +13,13 @@
 
 ## Introduction
 
-This sample shows how to connect an Angular app to a Microsoft work or school (Azure Active Directory) or personal (Microsoft) account  using the Microsoft Graph API to send an email. In addition, the sample uses the Office Fabric UI for styling and formatting the user experience.
+This sample shows how to connect an AngularJS app to a Microsoft work or school (Azure Active Directory) or personal (Microsoft) account  using the Microsoft Graph API to send an email. In addition, the sample uses the Office Fabric UI for styling and formatting the user experience.
 
 ![Microsoft Graph Connect sample screenshot](./README assets/screenshot.png)
 
 ## Prerequisites
 
-To use the Microsoft Graph Connect sample for Angular, you need the following:
+To use the Microsoft Graph Connect sample for AngularJS, you need the following:
 * [Node.js](https://nodejs.org/). Node is required to run the sample on a development server and to install dependencies. 
 
 * [Bower](https://bower.io). Bower is required to install front-end dependencies.
@@ -49,13 +49,13 @@ To use the Microsoft Graph Connect sample for Angular, you need the following:
 
 ## Build and run the sample
 
-1. Download or clone the Microsoft Graph Connect Sample for Angular.
+1. Download or clone the Microsoft Graph Connect Sample for AngularJS.
 
 2. Using your favorite IDE, open **config.js** in *public/scripts*.
 
 3. Replace the **clientId** placeholder value with the application ID of your registered Azure application.
 
-4. In a command prompt, run the following command in the root directory of the starter project. This installs project dependencies and the [Hello.js](http://adodson.com/hello.js/) client-side authententication library.
+4. In a command prompt, run the following command in the root directory of the starter project. This installs project dependencies, including the [HelloJS](http://adodson.com/hello.js/) client-side authententication library.
 
   ```
 npm install
