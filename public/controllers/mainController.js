@@ -7,83 +7,76 @@
   angular
     .module('app')
     .controller('MainController', MainController);
-
+    
   /**
    * The MainController code.
    */
-  function MainController($http, $log, GraphHelper) {
+  function MainController($http, $log, adalAuthenticationService) {
     var vm = this;
-
+    
     // Properties
     vm.isConnected;
-    vm.displayName;
+    vm.userAlias;
     vm.emailAddress;
     vm.emailAddressSent;
     vm.requestSuccess;
-    vm.requestFinished;
-
+    vm.requestFinished; 
+    
     // Methods
+    vm.connect = connect;
+    vm.disconnect = disconnect;
     vm.sendMail = sendMail;
-    vm.login = login;
-    vm.logout = logout;
-
+    
     /////////////////////////////////////////
     // End of exposed properties and methods.
-
+    
     /**
 		 * This function does any initialization work the 
 		 * controller needs.
 		 */
     (function activate() {
       // Check connection status and show appropriate UI.
-      if (localStorage.auth) {
-
-          // Check if the token is expired or about to expire.
-          let auth = angular.fromJson(localStorage.auth);
-          let expiration = new Date();
-          expiration.setTime((auth.expires - 300) * 1000); 
-
-          if (expiration > new Date()) {
-            $http.defaults.headers.common.Authorization = 'Bearer ' + auth.access_token;
-            let user;
-            if (!localStorage.user) {
-                GraphHelper.me().then(function(data) {
-                  user = angular.fromJson(localStorage.user);
-
-                  // Get the user name and email address.
-                  vm.displayName = user.displayName;
-                  vm.emailAddress = user.mail || user.userPrincipalName;
-                  vm.isConnected = true;
-              });
-            }
-            else {
-              user = angular.fromJson(localStorage.user);
-              
-              // Get the user name and email address.
-              vm.displayName = user.displayName;
-              vm.emailAddress = user.mail || user.userPrincipalName;
-              vm.isConnected = true;
-            }
-          }
+      if (adalAuthenticationService.userInfo.isAuthenticated) {
+        vm.isConnected = true;
+        
+        // Get the user alias from the universal principal name (UPN).
+        vm.userAlias = adalAuthenticationService.userInfo.profile.upn.split('@')[0];
+        
+        // Get the user email address.
+        vm.emailAddress = adalAuthenticationService.userInfo.profile.upn;
+      }
+      else {
+        vm.isConnected = false;
       }
     })();
-
-    function login() {
-      delete localStorage.user;
-      GraphHelper.login();
-    }
-
-    function logout() {
-      GraphHelper.logout();
-    }
-
+    
+    /**
+		 * Expose the login method from ADAL to the view.
+		 */
+    function connect() {
+      $log.debug('Connecting to Office 365...');
+      adalAuthenticationService.login();
+    };
+		
+		/**
+		 * Expose the logOut method from ADAL to the view.
+		 */
+    function disconnect() {
+      $log.debug('Disconnecting from Office 365...');
+      adalAuthenticationService.logOut();
+    };
+    
+    /**
+     * Send an email to the specified email address.
+     */
     function sendMail() {
       // This is the content of the email that's about to be sent.
       var emailContent = getEmailContent();
-
+      
       // Build the HTTP request payload (the Message object).
       var email = {
-          Subject: 'Welcome to Microsoft Graph development with Angular and the Microsoft Graph Connect sample',
+        Message: {
+          Subject: 'Welcome to Office 365 development with Angular and the Office 365 Connect sample',
           Body: {
             ContentType: 'HTML',
             Content: emailContent
@@ -95,28 +88,38 @@
               }
             }
           ]
+        },
+        SaveToSentItems: true
       };
-
+      
       // Save email address so it doesn't get lost with two way data binding.
       vm.emailAddressSent = vm.emailAddress;
       
-      GraphHelper.sendMail(email)
+      // Build the HTTP request to send an email.
+      var request = {
+        method: 'POST',
+        url: 'https://graph.microsoft.com/v1.0/me/microsoft.graph.sendmail',
+        data: email
+      };
+      
+      // Execute the HTTP request. 
+      $http(request)
         .then(function (response) {
-          $log.debug('HTTP request to Microsoft Graph API returned successfully.', response);
-          response.status === 202 ? vm.requestSuccess = true : vm.requestSuccess = false;
+          $log.debug('HTTP request to Microsoft Graph API returned successfully.', response);     
+          response.status === 202 ? vm.requestSuccess = true : vm.requestSuccess = false; 
           vm.requestFinished = true;
         }, function (error) {
           $log.error('HTTP request to Microsoft Graph API failed.');
-          vm.requestSuccess = false;
+          vm.requestSuccess= false;
           vm.requestFinished = true;
         });
     };
-
+    
     /**
      * Gets the HTMl for the email to send.
      */
     function getEmailContent() {
-      return "<html><head> <meta http-equiv=\'Content-Type\' content=\'text/html; charset=us-ascii\'> <title></title> </head><body style=\'font-family:calibri\'> <p>Congratulations " + vm.displayName + ",</p> <p>This is a message from the Microsoft Graph Connect sample. You are well on your way to incorporating Microsoft Graph endpoints in your apps. </p> <h3>What&#8217;s next?</h3><ul><li>Check out <a href='https://graph.microsoft.io' target='_blank'>graph.microsoft.io</a> to start building Microsoft Graph apps today with all the latest tools, templates, and guidance to get started quickly.</li><li>Use the <a href='https://graph.microsoft.io/graph-explorer' target='_blank'>Graph explorer</a> to explore the rest of the APIs and start your testing.</li><li>Browse other <a href='https://github.com/microsoftgraph/' target='_blank'>samples on GitHub</a> to see more of the APIs in action.</li></ul> <h3>Give us feedback</h3> <ul><li>If you have any trouble running this sample, please <a href='https://github.com/microsoftgraph/angular-connect-rest-sample/issues' target='_blank'>log an issue</a>.</li><li>For general questions about the Microsoft Graph API, post to <a href='https://stackoverflow.com/questions/tagged/microsoftgraph?sort=newest' target='blank'>Stack Overflow</a>. Make sure that your questions or comments are tagged with [microsoftgraph].</li></ul><p>Thanks and happy coding!<br>Your Microsoft Graph samples development team</p> <div style=\'text-align:center; font-family:calibri\'> <table style=\'width:100%; font-family:calibri\'> <tbody> <tr> <td><a href=\'https://github.com/microsoftgraph/angular-connect-rest-sample\'>See on GitHub</a> </td> <td><a href=\'https://officespdev.uservoice.com/\'>Suggest on UserVoice</a> </td> <td><a href=\'https://twitter.com/share?text=I%20just%20started%20developing%20%23Angular%20apps%20using%20the%20%23MicrosoftGraph%20Connect%20sample!%20&url=https://github.com/microsoftgraph/angular-connect-rest-sample\'>Share on Twitter</a> </td> </tr> </tbody> </table> </div>  </body> </html>";
+      return "<html><head> <meta http-equiv=\'Content-Type\' content=\'text/html; charset=us-ascii\'> <title></title> </head><body style=\'font-family:calibri\'> <p>Congratulations " + vm.userAlias + ",</p> <p>This is a message from the Office 365 Connect sample. You are well on your way to incorporating Office 365 services in your apps. </p> <h3>What&#8217;s next?</h3> <ul><li>Check out <a href='http://dev.office.com' target='_blank'>dev.office.com</a> to start building Office 365 apps today with all the latest tools, templates, and guidance to get started quickly.</li><li>Head over to the <a href='https://msdn.microsoft.com/office/office365/howto/office-365-unified-api-reference' target='blank'>API reference on MSDN</a> to explore the rest of the APIs.</li><li>Browse other <a href='https://github.com/OfficeDev/' target='_blank'>samples on GitHub</a> to see more of the APIs in action.</li></ul> <h3>Give us feedback</h3> <ul><li>If you have any trouble running this sample, please <a href='http://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Connect/issues' target='_blank'>log an issue</a>.</li><li>For general questions about the Office 365 APIs, post to <a href='http://stackoverflow.com/' target='blank'>Stack Overflow</a>. Make sure that your questions or comments are tagged with [office365].</li></ul><p>Thanks and happy coding!<br>Your Office 365 Development team </p> <div style=\'text-align:center; font-family:calibri\'> <table style=\'width:100%; font-family:calibri\'> <tbody> <tr> <td><a href=\'http://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Connect'>See on GitHub</a> </td> <td><a href=\'http://officespdev.uservoice.com/'>Suggest on UserVoice</a> </td> <td><a href=\'http://twitter.com/share?text=I%20just%20started%20developing%20Angular%20apps%20using%20the%20%23Office365%20Connect%20app!%20%40OfficeDev&url=http://github.com/OfficeDev/O365-Angular-Microsoft-Graph-Connect'>Share on Twitter</a> </td> </tr> </tbody> </table> </div>  </body> </html>";
     };
   };
 })();

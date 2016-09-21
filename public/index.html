@@ -7,31 +7,31 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Microsoft Graph Connect sample</title>
+  <title>O365 Connect sample</title>
   <base href="/">
 
   <!-- Third party dependencies. -->
   <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.css">
   <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.components.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-route.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.8.0/loading-bar.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.8.0/loading-bar.css">
-  <script src="./bower_components/hello/dist/hello.all.js"></script>
-	<script src="./bower_components/hello/src/hello.polyfill.js"></script>
-	<script src="./bower_components/hello/src/hello.js"></script>
 
   <!-- App code. -->
-  <script src="/scripts/constants.js"></script>
-  <script src="/scripts/app.js"></script>
-  <script src="/scripts/aad.js"></script>
-  <script src="/scripts/graphHelper.js"></script>
-  <script src="/controllers/mainController.js"></script>  
+  <script src="scripts/config.js"></script>
+  <script src="scripts/app.js"></script>
+  <script src="controllers/mainController.js"></script>
   <link rel="stylesheet" href="styles.css">
+
+  <!-- ADAL JS files. -->
+  <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.7/js/adal.min.js"></script>
+  <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.7/js/adal-angular.min.js"></script>
 </head>
 
 <body class="ms-Grid">
-  <div ng-controller="MainController as main" ng-include="'views/main.html'"></div>
+  <div ng-view></div>
 </body>
 
 </html>
