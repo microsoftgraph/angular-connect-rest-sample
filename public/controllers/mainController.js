@@ -131,7 +131,9 @@
             vm.requestFinished = true;
           });
        } else {
-         $window.location.href = '/';
+
+         // If the token is expired, this sample just redirects the user to sign in.
+         GraphHelper.login();
        }
     };
 

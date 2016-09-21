@@ -10,6 +10,7 @@
     .module('app')
     .service('GraphHelper', ['$http', function ($http) {
 
+      // Initialize the auth request.
       hello.init( {
         aad: clientId // from public/scripts/config.js
         }, {
