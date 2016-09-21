@@ -12,64 +12,71 @@
    * The MainController code.
    */
   function MainController($http, $log, GraphHelper) {
-    var vm = this;
+    let vm = this;
 
-    // Properties
-    vm.isConnected;
+    // View model properties
     vm.displayName;
     vm.emailAddress;
     vm.emailAddressSent;
     vm.requestSuccess;
     vm.requestFinished;
 
-    // Methods
+    // View model methods
     vm.sendMail = sendMail;
     vm.login = login;
     vm.logout = logout;
+    vm.isAuthenticated = isAuthenticated;
+    vm.initAuth = initAuth;
 
     /////////////////////////////////////////
     // End of exposed properties and methods.
 
-    /**
-		 * This function does any initialization work the 
-		 * controller needs.
-		 */
-    (function activate() {
-      // Check connection status and show appropriate UI.
+    function initAuth() {
+      // Check initial connection status.
       if (localStorage.auth) {
-
-          // Check if the token is expired or about to expire.
-          let auth = angular.fromJson(localStorage.auth);
-          let expiration = new Date();
-          expiration.setTime((auth.expires - 300) * 1000); 
-
-          if (expiration > new Date()) {
-            $http.defaults.headers.common.Authorization = 'Bearer ' + auth.access_token;
-            let user;
-            if (!localStorage.user) {
-                GraphHelper.me().then(function(data) {
-                  user = angular.fromJson(localStorage.user);
-
-                  // Get the user name and email address.
-                  vm.displayName = user.displayName;
-                  vm.emailAddress = user.mail || user.userPrincipalName;
-                  vm.isConnected = true;
-              });
-            }
-            else {
-              user = angular.fromJson(localStorage.user);
-              
-              // Get the user name and email address.
-              vm.displayName = user.displayName;
-              vm.emailAddress = user.mail || user.userPrincipalName;
-              vm.isConnected = true;
-            }
-          }
+        processAuth();
+      } else {
+        let auth = hello('aad').getAuthResponse();
+        if (auth !== null) {
+          localStorage.auth = angular.toJson(auth);
+          processAuth();
+        }
       }
-    })();
+    }
+
+    // Auth info is saved in localStorage by now, so set the default headers and user properties.
+    function processAuth() {
+        let auth = angular.fromJson(localStorage.auth);
+        
+        $http.defaults.headers.common.Authorization = 'Bearer ' + auth.access_token;
+
+        if (localStorage.getItem('user') === null) {
+          GraphHelper.me().then(function(response) {
+            
+            // Save the user to localStorage.
+            let user = angular.fromJson(response);
+            localStorage.setItem('user', angular.toJson(response));
+
+            vm.displayName = user.displayName;
+            vm.emailAddress = user.mail || user.userPrincipalName;
+          });
+        } else {
+          let user = angular.fromJson(localStorage.user);
+            
+          // Get the user name and email address.
+          vm.displayName = user.displayName;
+          vm.emailAddress = user.mail || user.userPrincipalName;
+        }
+    }
+
+    vm.initAuth();    
+
+    function isAuthenticated() {
+      return localStorage.getItem('user') !== null;
+    }
 
     function login() {
-      delete localStorage.user;
+      //delete localStorage.user;
       GraphHelper.login();
     }
 
