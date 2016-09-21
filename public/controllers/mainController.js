@@ -58,8 +58,8 @@
           GraphHelper.me().then(function(response) {
             
             // Save the user to localStorage.
-            let user = angular.fromJson(response);
-            localStorage.setItem('user', angular.toJson(response));
+            let user =response.data;
+            localStorage.setItem('user', angular.toJson(user));
 
             vm.displayName = user.displayName;
             vm.emailAddress = user.mail || user.userPrincipalName;
