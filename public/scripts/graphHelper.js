@@ -5,20 +5,15 @@
 
 "use strict";
 
-hello.on('auth.login', function (auth) {
-  localStorage.auth = angular.toJson(auth.authResponse);
-  delete localStorage.user;
-});
-
 (function () {
   angular
     .module('app')
-    .service('GraphHelper', ['$http', function ($http, $q) {
+    .service('GraphHelper', ['$http', function ($http) {
       hello.init({
-        aad: clientId // from public/scripts/constants.js
+        aad: clientId // from public/scripts/config.js
       }, {
           redirect_uri: redirectUrl,
-          scope: 'user.read mail.send'
+          scope: graphScopes
         });
 
       return {
@@ -26,8 +21,7 @@ hello.on('auth.login', function (auth) {
           return $http.get('https://graph.microsoft.com/v1.0/me')
             .then(function (response) {
               if (response && response.data) {
-                localStorage.user = angular.toJson(response.data);
-                return;
+                return response.data;
               }
               else {
                 throw new Error('Invalid response');
@@ -47,7 +41,6 @@ hello.on('auth.login', function (auth) {
           hello('aad').logout();
           delete localStorage.auth;
           delete localStorage.user;
-          window.location.href('/');
         },
         sendMail: function sendMail(email) {
           return $http.post('https://graph.microsoft.com/v1.0/me/sendMail', { 'message' : email, 'saveToSentItems': true })
