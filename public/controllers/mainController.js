@@ -8,7 +8,7 @@
     .module('app')
     .controller('MainController', MainController);
 
-  function MainController($http, $log, GraphHelper) {
+  function MainController($http, $log, $window, GraphHelper) {
     let vm = this;
 
     // View model properties
@@ -32,7 +32,7 @@
 
       // Check initial connection status.
       if (localStorage.auth) {
-        processAuth();
+          processAuth();
       } else {
         let auth = hello('aad').getAuthResponse();
         if (auth !== null) {
@@ -44,32 +44,38 @@
 
     // Auth info is saved in localStorage by now, so set the default headers and user properties.
     function processAuth() {
-        let auth = angular.fromJson(localStorage.auth);
-        
-        // Add the required Authorization header with bearer token.
-        $http.defaults.headers.common.Authorization = 'Bearer ' + auth.access_token;
-        
-        // This header has been added to identify our sample in the Microsoft Graph service. If extracting this code for your project please remove.
-        $http.defaults.headers.common.SampleID = 'angular-connect-rest-sample';
+        let auth = angular.fromJson(localStorage.auth); 
 
-        if (localStorage.getItem('user') === null) {
+        // Check token expiry. If the token is valid for another 5 minutes, we'll use it.       
+        let expiration = new Date();
+        expiration.setTime((auth.expires - 300) * 1000); 
+        if (expiration > new Date()) {
 
-          // Get the profile of the current user.
-          GraphHelper.me().then(function(response) {
-            
-            // Save the user to localStorage.
-            let user =response.data;
-            localStorage.setItem('user', angular.toJson(user));
+          // Add the required Authorization header with bearer token.
+          $http.defaults.headers.common.Authorization = 'Bearer ' + auth.access_token;
+          
+          // This header has been added to identify our sample in the Microsoft Graph service. If extracting this code for your project please remove.
+          $http.defaults.headers.common.SampleID = 'angular-connect-rest-sample';
 
+          if (localStorage.getItem('user') === null) {
+
+            // Get the profile of the current user.
+            GraphHelper.me().then(function(response) {
+              
+              // Save the user to localStorage.
+              let user =response.data;
+              localStorage.setItem('user', angular.toJson(user));
+
+              vm.displayName = user.displayName;
+              vm.emailAddress = user.mail || user.userPrincipalName;
+            });
+          } else {
+            let user = angular.fromJson(localStorage.user);
+              
             vm.displayName = user.displayName;
             vm.emailAddress = user.mail || user.userPrincipalName;
-          });
-        } else {
-          let user = angular.fromJson(localStorage.user);
-            
-          vm.displayName = user.displayName;
-          vm.emailAddress = user.mail || user.userPrincipalName;
-        }
+          }
+       }
     }
 
     vm.initAuth();    
@@ -89,35 +95,44 @@
     // Send an email on behalf of the current user.
     function sendMail() {
 
-      // Build the HTTP request payload (the Message object).
-      var email = {
-          Subject: 'Welcome to Microsoft Graph development with Angular and the Microsoft Graph Connect sample',
-          Body: {
-            ContentType: 'HTML',
-            Content: getEmailContent()
-          },
-          ToRecipients: [
-            {
-              EmailAddress: {
-                Address: vm.emailAddress
+      // Check token expiry. If the token is valid for another 5 minutes, we'll use it.
+      let auth = angular.fromJson(localStorage.auth);       
+      let expiration = new Date();
+      expiration.setTime((auth.expires - 300) * 1000); 
+      if (expiration > new Date()) {
+        
+        // Build the HTTP request payload (the Message object).
+        var email = {
+            Subject: 'Welcome to Microsoft Graph development with Angular and the Microsoft Graph Connect sample',
+            Body: {
+              ContentType: 'HTML',
+              Content: getEmailContent()
+            },
+            ToRecipients: [
+              {
+                EmailAddress: {
+                  Address: vm.emailAddress
+                }
               }
-            }
-          ]
-      };
+            ]
+        };
 
-      // Save email address so it doesn't get lost with two way data binding.
-      vm.emailAddressSent = vm.emailAddress;
-      
-      GraphHelper.sendMail(email)
-        .then(function (response) {
-          $log.debug('HTTP request to the Microsoft Graph API returned successfully.', response);
-          response.status === 202 ? vm.requestSuccess = true : vm.requestSuccess = false;
-          vm.requestFinished = true;
-        }, function (error) {
-          $log.error('HTTP request to the Microsoft Graph API failed.');
-          vm.requestSuccess = false;
-          vm.requestFinished = true;
-        });
+        // Save email address so it doesn't get lost with two way data binding.
+        vm.emailAddressSent = vm.emailAddress;
+        
+        GraphHelper.sendMail(email)
+          .then(function (response) {
+            $log.debug('HTTP request to the Microsoft Graph API returned successfully.', response);
+            response.status === 202 ? vm.requestSuccess = true : vm.requestSuccess = false;
+            vm.requestFinished = true;
+          }, function (error) {
+            $log.error('HTTP request to the Microsoft Graph API failed.');
+            vm.requestSuccess = false;
+            vm.requestFinished = true;
+          });
+       } else {
+         $window.location.href = '/';
+       }
     };
 
     // Get the HTMl for the email to send.

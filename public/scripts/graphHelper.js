@@ -39,7 +39,7 @@
 
         // Send an email on behalf of the current user.
         sendMail: function sendMail(email) {
-          return $http.post('https://graph.microsoft.com/v1.0/me/sendMail', { 'message' : email, 'saveToSentItems': true })        
+          return $http.post('https://graph.microsoft.com/v1.0/me/sendMail', { 'message' : email, 'saveToSentItems': true });        
         }
       }
     }]);
