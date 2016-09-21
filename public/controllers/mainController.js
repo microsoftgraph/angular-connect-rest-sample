@@ -46,7 +46,11 @@
     function processAuth() {
         let auth = angular.fromJson(localStorage.auth);
         
+        // Add the required Authorization header with bearer token.
         $http.defaults.headers.common.Authorization = 'Bearer ' + auth.access_token;
+        
+        // This header has been added to identify our sample in the Microsoft Graph service. If extracting this code for your project please remove.
+        $http.defaults.headers.common.SampleID = 'angular-connect-rest-sample';
 
         if (localStorage.getItem('user') === null) {
 
