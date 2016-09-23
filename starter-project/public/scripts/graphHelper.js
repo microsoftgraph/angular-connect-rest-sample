@@ -7,6 +7,7 @@
 // Microsoft does not provide fixes or direct support for this library. 
 // Refer to the library’s repository to file issues or for other support. 
 // For more information about auth libraries see: https://azure.microsoft.com/documentation/articles/active-directory-v2-libraries/ 
+// Library repo: https://github.com/MrSwitch/hello.js
 
 "use strict";
 
