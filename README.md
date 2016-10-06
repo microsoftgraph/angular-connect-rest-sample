@@ -55,7 +55,7 @@ To use the Microsoft Graph Connect sample for AngularJS, you need the following:
 
 3. Replace the **clientId** placeholder value with the application ID of your registered Azure application.
 
-4. In a command prompt, run the following command in the root directory of the starter project. This installs project dependencies, including the [HelloJS](http://adodson.com/hello.js/) client-side authententication library.
+4. In a command prompt, run the following command in the root directory. This installs project dependencies, including the [HelloJS](http://adodson.com/hello.js/) client-side authententication library.
 
   ```
 npm install
