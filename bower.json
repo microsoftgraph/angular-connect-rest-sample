@@ -1,0 +1,16 @@
+{
+  "name": "Microsoft-Graph-Connect-Angular",
+  "main": "server.js",
+  "license": "MIT",
+  "homepage": "https://github.com/microsoftgraph/angular-connect-rest-sample",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "hello": "^1.14.0"
+  }
+}

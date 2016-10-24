@@ -6,7 +6,6 @@
 * [Prerequisites](#prerequisites)
 * [Register the application](#register-the-application)
 * [Build and run the sample](#build-and-run-the-sample)
-* [Code of note](#code-of-note)
 * [Questions and comments](#questions-and-comments)
 * [Contributing](#contributing)
 * [Additional resources](#additional-resources)
@@ -42,7 +41,7 @@ To use the Microsoft Graph Connect sample for AngularJS, you need the following:
 
 6. Choose **Web**.
 
-7. Make sure the **Allow Implicit Flow** check box is selected, and enter *http://localhost:8080/login* as the Redirect URI. 
+7. Make sure the **Allow Implicit Flow** check box is selected, and enter *http://localhost:8080* as the Redirect URI. 
 
 8. Choose **Save**.
 
@@ -59,7 +58,7 @@ To use the Microsoft Graph Connect sample for AngularJS, you need the following:
 
   ```
 npm install
-bower install hello
+bower install
   ```
   
 5. Run `npm start` to start the development server.
