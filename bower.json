@@ -1,5 +1,5 @@
 {
-  "name": "Microsoft-Graph-Connect-Angular",
+  "name": "microsoft-graph-connect-angular",
   "main": "server.js",
   "license": "MIT",
   "homepage": "https://github.com/microsoftgraph/angular-connect-rest-sample",

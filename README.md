@@ -1,4 +1,4 @@
-# Microsoft Graph Connect Sample for AngularJS
+# Microsoft Graph Connect Sample for AngularJS (REST)
 
 ## Table of contents
 
