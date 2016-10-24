@@ -12,7 +12,7 @@
 
 ## Introduction
 
-This sample shows how to connect an AngularJS app to a Microsoft work or school (Azure Active Directory) or personal (Microsoft) account  using the Microsoft Graph API to send an email. In addition, the sample uses the Office Fabric UI for styling and formatting the user experience.
+This sample shows how to connect an AngularJS app to a Microsoft work or school (Azure Active Directory) or personal (Microsoft) account  using the Microsoft Graph API to send an email. In addition, the sample uses the Office Fabric UI for styling and formatting the user experience.  We also have an [Angular connect sample](https://github.com/microsoftgraph/angular-connect-sample) that uses that [Microsoft Graph JavaScript SDK](https://github.com/microsoftgraph/msgraph-sdk-javascript).
 
 ![Microsoft Graph Connect sample screenshot](./README assets/screenshot.png)
 
@@ -54,7 +54,7 @@ To use the Microsoft Graph Connect sample for AngularJS, you need the following:
 
 3. Replace the **clientId** placeholder value with the application ID of your registered Azure application.
 
-4. In a command prompt, run the following command in the root directory of the starter project. This installs project dependencies, including the [HelloJS](http://adodson.com/hello.js/) client-side authententication library.
+4. In a command prompt, run the following command in the root directory. This installs project dependencies, including the [HelloJS](http://adodson.com/hello.js/) client-side authententication library.
 
   ```
 npm install
