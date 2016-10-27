@@ -4,5 +4,5 @@
 */
 
 var clientId = "ENTER_YOUR_CLIENT_ID";
-var redirectUrl = "http://localhost:8080/login";
+var redirectUrl = "http://localhost:8080";
 var graphScopes = "user.read mail.send";
