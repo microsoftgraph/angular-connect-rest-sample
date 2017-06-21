@@ -21,8 +21,6 @@ This sample shows how to connect an AngularJS app to a Microsoft work or school 
 To use the Microsoft Graph Connect sample for AngularJS, you need the following:
 * [Node.js](https://nodejs.org/). Node is required to run the sample on a development server and to install dependencies. 
 
-* [Bower](https://bower.io). Bower is required to install front-end dependencies.
-
 * Either a [Microsoft account](https://www.outlook.com) or [Office 365 for business account](https://msdn.microsoft.com/en-us/office/office365/howto/setup-development-environment#bk_Office365Account)
 
 ## Register the application
@@ -52,13 +50,12 @@ To use the Microsoft Graph Connect sample for AngularJS, you need the following:
 
 2. Using your favorite IDE, open **config.js** in *public/scripts*.
 
-3. Replace the **clientId** placeholder value with the application ID of your registered Azure application.
+3. Replace the **clientID** placeholder value with the application ID of your registered Azure application.
 
-4. In a command prompt, run the following command in the root directory. This installs project dependencies, including the [HelloJS](http://adodson.com/hello.js/) client-side authententication library.
+4. In a command prompt, run the following command in the root directory. This installs project dependencies.
 
   ```
 npm install
-bower install
   ```
   
 5. Run `npm start` to start the development server.
