@@ -3,6 +3,10 @@
 *  See LICENSE in the source repository root for complete license information. 
 */
 
-var clientId = "ENTER_YOUR_CLIENT_ID";
-var redirectUrl = "http://localhost:8080";
-var graphScopes = "user.read mail.send";
+var APPLICATION_CONFIG = {
+    clientID: "ENTER_YOUR_CLIENT_ID",
+    redirectUri: "http://localhost:8080/",
+    interactionMode: "popUp",
+    graphEndpoint: "https://graph.microsoft.com/v1.0/me",
+    graphScopes: ["user.read mail.send"]
+};
