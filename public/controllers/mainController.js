@@ -111,12 +111,10 @@
             $log.debug('HTTP request to the Microsoft Graph API returned successfully.', response);
             response.status === 202 ? vm.requestSuccess = true : vm.requestSuccess = false;
             vm.requestFinished = true;
-            //$scope.$apply();
           }, function (error) {
             $log.error('HTTP request to the Microsoft Graph API failed.');
             vm.requestSuccess = false;
             vm.requestFinished = true;
-            //$scope.$apply();
           });
     };
 
