@@ -16,6 +16,8 @@ This sample shows how to connect an AngularJS app to a Microsoft work or school 
 
 ![Microsoft Graph Connect sample screenshot](./README_assets/screenshot.png)
 
+This sample uses the [Microsoft Authentication Library Preview for JavaScript (msal.js)](https://github.com/AzureAD/microsoft-authentication-library-for-js) to get an access token.
+
 ## Prerequisites
 
 To use the Microsoft Graph Connect sample for AngularJS, you need the following:
