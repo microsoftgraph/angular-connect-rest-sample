@@ -21,29 +21,31 @@ This sample uses the [Microsoft Authentication Library Preview for JavaScript (m
 ## Prerequisites
 
 To use the Microsoft Graph Connect sample for AngularJS, you need the following:
-* [Node.js](https://nodejs.org/). Node is required to run the sample on a development server and to install dependencies. 
+* [Node.js](https://nodejs.org/). Node is required to run the sample on a development server and to install dependencies.
 
 * Either a [Microsoft account](https://www.outlook.com) or [Office 365 for business account](https://msdn.microsoft.com/en-us/office/office365/howto/setup-development-environment#bk_Office365Account)
 
 ## Register the application
 
-1. Sign into the [App Registration Portal](https://apps.dev.microsoft.com/) using either your personal or work or school account.
+1. Sign in to the [Azure Portal](https://portal.azure.com/) to register an application.
 
-2. Choose **Add an app**.
+1. If your account gives you access to more than one tenant, select your account in the top right corner, and set your portal session to the desired Azure AD tenant.
 
-3. Enter a name for the app, and choose **Create application**. 
-	
-   The registration page displays, listing the properties of your app.
+1. In the left-hand navigation pane, select the **Azure Active Directory** service, and then select **App registrations (Preview) > New registration**.
 
-4. Copy the Application Id. This is the unique identifier for your app. 
+1. When the **Register an application** page appears, enter a name for your application.
 
-5. Under **Platforms**, choose **Add Platform**.
+1. Under **Supported account types**, select **Accounts in any organizational directory and personal Microsoft accounts (e.g. Skype, Xbox, Outlook.com)**.
 
-6. Choose **Web**.
+1. Select the **Web** platform under the **Redirect URI** section and set the value to *http://localhost:8080/*.
 
-7. Make sure the **Allow Implicit Flow** check box is selected, and enter *http://localhost:8080* as the Redirect URI. 
+1. When finished, select **Register**.  On the app **Overview** page, note down the **Application ID** value.
 
-8. Choose **Save**.
+1. This quickstart requires the [Implicit grant flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-implicit-grant-flow) to be enabled. In the left-hand navigation pane of the registered application, select **Authentication**.
+
+1. In **Advanced settings**, under **Implicit grant**, enable both **ID tokens** and **Access tokens** checkboxes. ID tokens and Access tokens are required since this app needs to sign in users and call an API.
+
+1. Select **Save**.
 
 
 ## Build and run the sample
